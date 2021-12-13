@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Train Station</title>
+</head>
+<body>
+
+<th:block th:if="${home}">
+    <form th:method="GET" action="/home/passengers">
+        <h3>Some home page</h3>
+        <p>Greeting</p>
+        <img src="..\Pictures\train.jpg" alt="*train picture*">
+        <input value="Open passengers" type="submit"/>
+    </form>
+</th:block>
+
+<th:block th:if="${passengers}">
+    <h3>All passengers</h3>
+    <div th:each="passenger: ${response}">
+        <form th:method="GET"
+              th:action="@{/passenger/__${passenger.getId()}__/print}">
+            <table>
+                <tr>
+                    <th><input value="Open" type="submit"/></th>
+                    <th><p th:text="${passenger.toString()}"></p></th>
+                </tr>
+            </table>
+        </form>
+    </div>
+</th:block>
+
+<th:block th:if="${edit}">
+    <form th:method="POST" action="/create">
+        <h3>Alteration</h3>
+        <h4>Passenger:</h4>
+        <p th:text="${response.getPassengerDTO().toString()}">
+        <h4>Trains:</h4>
+        <div th:each="train: ${response.getTrainDTOList()}">
+            <p th:text="${train.toString()}"></p>
+        </div>
+        <h3>Operations</h3>
+    </form>
+    <form th:method="GET" action="delete">
+        <input type="submit" value="Delete"/>
+    </form>
+    <form th:method="GET" action="move">
+        <input type="submit" value="Move and delete"/>
+    </form>
+</th:block>
+
+<th:block th:if="${payment}">
+    <form th:method="GET" action="/search">
+        <h3>Registration was successful</h3>
+        <h4>Passenger: </h4>
+        <p th:text="${response.getPassenger().toString()}"></p>
+        <h4>Registered on train: </h4>
+        <p th:text="${response.getTrain().toString()}"></p>
+
+        <input type="submit" value="Ok"/>
+    </form>
+</th:block>
+</body>
+</html>
