@@ -1,5 +1,8 @@
 package com.kolmakova.entities;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 
 @Table(name = "Payment")
@@ -21,6 +24,10 @@ public class Payment {
 
     @Column(name = "amount")
     private Double amount;
+
+    @Column(columnDefinition = "TINYINT(1)", name = "mark_as_deleted")
+//    @Type(type = "org.hibernate.type.NumericBooleanType")
+    private boolean isDeleted;
 
     public Integer getId() {
         return id;
@@ -54,35 +61,44 @@ public class Payment {
         this.passenger = passenger;
     }
 
-    public static Builder builder(){
+    public boolean getIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
+    public static Builder builder() {
         return new Payment().new Builder();
     }
 
     public class Builder {
 
-        private Builder() { }
+        private Builder() {
+        }
 
-        public Builder setId(Integer id){
+        public Builder setId(Integer id) {
             Payment.this.id = id;
             return this;
         }
 
-        public Builder setTrain(Train train){
+        public Builder setTrain(Train train) {
             Payment.this.train = train;
             return this;
         }
 
-        public Builder setPassenger(Passenger passenger){
+        public Builder setPassenger(Passenger passenger) {
             Payment.this.passenger = passenger;
             return this;
         }
 
-        public Builder setAmount(Double amount){
+        public Builder setAmount(Double amount) {
             Payment.this.amount = amount;
             return this;
         }
 
-        public Payment build(){
+        public Payment build() {
             return Payment.this;
         }
     }

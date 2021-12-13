@@ -21,7 +21,11 @@ public class PaymentService {
         return paymentRepository.findById(checkId).orElse(new Payment());
     }
 
-    public List<Payment> getPassengerPayments(Integer passengerId){
+    public List<Payment> getPaymentsByPassengerId(Integer passengerId){
         return paymentRepository.getPassengerPayments(passengerId);
     }
+//
+//    public void markAsDeleted(int paymentId){
+//        paymentRepository.markAsDeleted(paymentId);
+//    }
 }

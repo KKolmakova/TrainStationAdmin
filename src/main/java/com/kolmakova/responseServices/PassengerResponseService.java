@@ -6,5 +6,5 @@ import java.util.List;
 
 public interface PassengerResponseService {
 
-    List<PassengerResponse> getResponse();
+    PassengerResponse getResponse();
 }
