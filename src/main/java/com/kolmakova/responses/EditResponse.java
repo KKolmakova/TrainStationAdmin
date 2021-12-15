@@ -8,6 +8,7 @@ import java.util.List;
 
 public class EditResponse {
 
+    private List<PaymentDTO> deletedPaymentDTOList;
     private List<PaymentDTO> paymentDTOList;
     private PassengerDTO passengerDTO;
 
@@ -25,5 +26,13 @@ public class EditResponse {
 
     public void setPaymentDTOList(List<PaymentDTO> paymentDTOList) {
         this.paymentDTOList = paymentDTOList;
+    }
+
+    public List<PaymentDTO> getDeletedPaymentDTOList() {
+        return deletedPaymentDTOList;
+    }
+
+    public void setDeletedPaymentDTOList(List<PaymentDTO> deletedPaymentDTOList) {
+        this.deletedPaymentDTOList = deletedPaymentDTOList;
     }
 }

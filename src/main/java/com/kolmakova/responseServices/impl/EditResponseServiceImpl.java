@@ -13,11 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
 @Transactional
-public class EditResponseServiceImp implements EditResponseService {
+public class EditResponseServiceImpl implements EditResponseService {
 
     @Autowired
     private PassengerService passengerService;
@@ -31,11 +32,22 @@ public class EditResponseServiceImp implements EditResponseService {
         EditResponse editResponse = new EditResponse();
 
         List<Payment> paymentList = paymentService.getPaymentsByPassengerId(passengerId);
-        List<PaymentDTO> paymentDTOList = converter.convertToPaymentDTOList(paymentList);
+        List<PaymentDTO> payments = converter.convertToPaymentDTOList(paymentList);
 
+        List<PaymentDTO> deletesPaymentsDTO = new ArrayList<>();
+        List<PaymentDTO> paymentDTOList = new ArrayList<>();
         PassengerDTO passengerDTO = converter.convertToPassengerDTO(passengerService.getPassengerById(passengerId));
 
+        for (PaymentDTO paymentDTO : payments) {
+            if (paymentDTO.getIsDeleted()) {
+                deletesPaymentsDTO.add(paymentDTO);
+            } else {
+                paymentDTOList.add(paymentDTO);
+            }
+        }
+
         editResponse.setPaymentDTOList(paymentDTOList);
+        editResponse.setDeletedPaymentDTOList(deletesPaymentsDTO);
         editResponse.setPassengerDTO(passengerDTO);
 
         return editResponse;

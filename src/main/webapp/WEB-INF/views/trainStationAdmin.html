@@ -17,17 +17,17 @@
 
 <th:block th:if="${passengers}">
     <h3>All passengers</h3>
-    <div th:each="passenger: ${response.getPassengerDTOList()}">
-        <form th:method="GET"
-              th:action="@{/passenger/__${passenger.getId()}__/print}">
-            <table>
+    <table>
+        <div th:each="passenger: ${response.getPassengerDTOList()}">
+            <form th:method="GET"
+                  th:action="@{/passenger/__${passenger.getId()}__/print}">
                 <tr>
-                    <th><input value="Open" type="submit"/></th>
-                    <th><p th:text="${passenger.toString()}"></p></th>
+                    <td><input value="Open" type="submit"/></td>
+                    <td><p th:text="${passenger.toString()}"></p></td>
                 </tr>
-            </table>
-        </form>
-    </div>
+            </form>
+        </div>
+    </table>
 </th:block>
 
 <th:block th:if="${edit}">
@@ -35,24 +35,39 @@
     <h4>Passenger:</h4>
     <p th:text="${response.getPassengerDTO().toString()}">
     <h4>Payments:</h4>
-    <div th:each="payment: ${response.getPaymentDTOList()}">
-        <form th:method="GET"
-              th:action="@{payment/__${payment.getId()}__/delete}">
-            <p th:text="${payment.toString()}"></p>
-            <input type="submit" value="Delete"/>
-        </form>
-    </div>
-    <h3>Operations</h3>
-</th:block>
-
-<th:block th:if="${delete}">
-    <form th:method="GET"
-          action="/home/passengers">
-        <h3>Successful deleted payment:</h3>
-        <p th:text="${response.getPaymentDTO().toString()}"></p>
-
-        <input type="submit" value="Ok"/>
-    </form>
+<!--    <div th:if="${response.getPaymentDTOList()} == null &&-->
+<!--         response.getDeletedPaymentDTOList() == null">-->
+        <table border="1">
+            <tr>
+                <th>Acting:</th>
+                <th>Deleted:</th>
+            </tr>
+            <tr>
+                <td>
+                    <div th:each="payment: ${response.getPaymentDTOList()}">
+                        <form th:method="GET"
+                              th:action="@{payment/__${payment.getId()}__/delete}">
+                            <p th:text="${payment.toString()}"></p>
+                            <input type="submit" value="Delete"/>
+                        </form>
+                    </div>
+                </td>
+                <td>
+                    <div th:each="payment: ${response.getDeletedPaymentDTOList()}">
+                        <form th:method="GET"
+                              th:action="@{payment/__${payment.getId()}__/restore}">
+                            <p th:text="${payment.toString()}"></p>
+                            <input type="submit" value="Restore"/>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        </table>
+<!--    </div>-->
+    <!--    <form th:method="GET"-->
+    <!--          th:action="@{return}">-->
+    <!--        <input type="submit" value="Return to all passengers"/>-->
+    <!--    </form>-->
 </th:block>
 </body>
 </html>
