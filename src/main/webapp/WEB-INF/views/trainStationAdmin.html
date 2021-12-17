@@ -35,11 +35,11 @@
     <h4>Passenger:</h4>
     <p th:text="${response.getPassengerDTO().toString()}">
     <h4>Payments:</h4>
-<!--    <div th:if="${response.getPaymentDTOList()} == null &&-->
-<!--         response.getDeletedPaymentDTOList() == null">-->
+    <div th:if="${not response.getPaymentDTOList().isEmpty or
+         not response.getDeletedPaymentDTOList().isEmpty()}">
         <table border="1">
             <tr>
-                <th>Acting:</th>
+                <th>Active:</th>
                 <th>Deleted:</th>
             </tr>
             <tr>
@@ -63,11 +63,15 @@
                 </td>
             </tr>
         </table>
-<!--    </div>-->
-    <!--    <form th:method="GET"-->
-    <!--          th:action="@{return}">-->
-    <!--        <input type="submit" value="Return to all passengers"/>-->
-    <!--    </form>-->
+    </div>
+    <div th:if="${response.getPaymentDTOList().isEmpty and
+         response.getDeletedPaymentDTOList().isEmpty()}">
+        <p>There is no checks</p>
+    </div>
+        <form th:method="GET"
+              th:action="return">
+            <input type="submit" value="Return to all passengers"/>
+        </form>
 </th:block>
 </body>
 </html>

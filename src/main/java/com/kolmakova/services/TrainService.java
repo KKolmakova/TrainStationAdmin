@@ -4,11 +4,15 @@ import com.kolmakova.entities.Train;
 import com.kolmakova.repositories.TrainRepository;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.criteria.Predicate;
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.springframework.data.jpa.domain.Specification.where;
 
 @Transactional
 @Service
@@ -19,10 +23,6 @@ public class TrainService {
 
     public List<Train> list() {
         return trainRepository.findAll();
-    }
-
-    public List<Train> getByArrivalPlace(String arrivalPlace) {
-        return trainRepository.findTrainByArrival(arrivalPlace);
     }
 
     public Train getTrainById(int id) {
@@ -45,5 +45,9 @@ public class TrainService {
 
     public List<Train> getTrainsByIds(List<Integer> id) {
         return trainRepository.findAllById(id);
+    }
+
+    public Predicate get(){
+        return null;
     }
 }

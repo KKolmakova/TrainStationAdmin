@@ -39,7 +39,7 @@ public class EditResponseServiceImpl implements EditResponseService {
         PassengerDTO passengerDTO = converter.convertToPassengerDTO(passengerService.getPassengerById(passengerId));
 
         for (PaymentDTO paymentDTO : payments) {
-            if (paymentDTO.getIsDeleted()) {
+            if (paymentDTO.isDeleted()) {
                 deletesPaymentsDTO.add(paymentDTO);
             } else {
                 paymentDTOList.add(paymentDTO);

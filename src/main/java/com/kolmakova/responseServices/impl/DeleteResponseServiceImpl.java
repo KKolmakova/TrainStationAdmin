@@ -2,6 +2,7 @@ package com.kolmakova.responseServices.impl;
 
 import com.kolmakova.dto.PaymentDTO;
 import com.kolmakova.entities.Payment;
+import com.kolmakova.entities.Pricing;
 import com.kolmakova.responseServices.DeleteResponseService;
 import com.kolmakova.responses.PaymentResponse;
 import com.kolmakova.services.PaymentService;
@@ -21,7 +22,7 @@ public class DeleteResponseServiceImpl implements DeleteResponseService {
     private Converter converter;
 
     @Override
-    public PaymentResponse getResponse(Integer paymentId){
+    public PaymentResponse getResponse(Integer paymentId) {
         PaymentResponse paymentResponse = new PaymentResponse();
 
         Payment payment = paymentService.getPaymentById(paymentId);
@@ -32,8 +33,10 @@ public class DeleteResponseServiceImpl implements DeleteResponseService {
         return paymentResponse;
     }
 
-    private Payment markAsDeleted(Payment payment){
-        payment.setIsDeleted(true);
+    private Payment markAsDeleted(Payment payment) {
+        Pricing pricing = payment.getPricing();
+        pricing.setSeatsNumber(pricing.getSeatsNumber() + 1);
+        payment.setDeleted(true);
 
         return paymentService.savePayment(payment);
     }

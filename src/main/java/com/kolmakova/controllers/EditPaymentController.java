@@ -50,11 +50,11 @@ public class EditPaymentController {
         return "redirect:/passenger/" + passengerId + "/print";
     }
 
-//    @GetMapping("/return")
-//    public String returnToAllPassengers(Model model) {
-//        model.addAttribute("passengers", true);
-//        model.addAttribute("response", passengerResponseService.getResponse());
-//
-//        return "redirect:/home/passengers";
-//    }
+    @GetMapping("/return")
+    public String returnToAllPassengers(Model model) {
+        model.addAttribute("passengers", true);
+        model.addAttribute("response", passengerResponseService.getResponse());
+
+        return "redirect:/home/passengers";
+    }
 }

@@ -1,6 +1,10 @@
 package com.kolmakova.entities;
 
+import org.hibernate.annotations.Where;
+
 import javax.persistence.*;
+import java.sql.Date;
+import java.util.List;
 
 @Table(name = "Passenger")
 @Entity
@@ -18,13 +22,18 @@ public class Passenger {
     private String sex;
 
     @Column(name = "birth_date")
-    private String birthDate;
+    private Date birthDate;
 
     @Column(name = "document_type")
     private String documentType;
 
     @Column(name = "document_series")
     private String documentSeries;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @Where(clause = "mark_as_deleted = false")
+    @JoinColumn(name = "passenger_id")
+    private List<Payment> paymentList;
 
     public void setId(Integer id) {
         this.id = id;
@@ -42,7 +51,7 @@ public class Passenger {
         this.sex = sex;
     }
 
-    public void setBirthDate(String birthDate) {
+    public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }
 
@@ -70,7 +79,7 @@ public class Passenger {
         return sex;
     }
 
-    public String getBirthDate() {
+    public Date getBirthDate() {
         return birthDate;
     }
 
@@ -82,16 +91,11 @@ public class Passenger {
         return documentSeries;
     }
 
-    @Override
-    public String toString() {
-        return "Passenger{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", sex='" + sex + '\'' +
-                ", birthDate='" + birthDate + '\'' +
-                ", documentType='" + documentType + '\'' +
-                ", documentSeries='" + documentSeries + '\'' +
-                '}';
+    public List<Payment> getPaymentList() {
+        return paymentList;
+    }
+
+    public void setPaymentList(List<Payment> paymentList) {
+        this.paymentList = paymentList;
     }
 }

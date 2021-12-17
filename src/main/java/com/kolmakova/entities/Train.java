@@ -1,6 +1,9 @@
 package com.kolmakova.entities;
 
 import javax.persistence.*;
+import java.sql.Date;
+import java.sql.Time;
+import java.util.List;
 
 @Table(name = "Train")
 @Entity
@@ -13,63 +16,75 @@ public class Train {
     @Column(name = "train_number")
     private int number;
 
-    @Column(name = "departure_time")
-    private String departureTime;
-
     @Column(name = "arrival_place")
     private String arrivalPlace;
 
     @Column(name = "departure_date")
-    private String departureDate;
+    private Date departureDate;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+    @Column(name = "departure_time")
+    private Time departureTime;
 
-    public void setNumber(int number) {
-        this.number = number;
-    }
+    @Column(name = "kilometers")
+    private int kilometers;
 
-    public void setDepartureTime(String departureTime) {
-        this.departureTime = departureTime;
-    }
-
-    public void setArrivalPlace(String arrivalPlace) {
-        this.arrivalPlace = arrivalPlace;
-    }
-
-    public void setDepartureDate(String departureDate) {
-        this.departureDate = departureDate;
-    }
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "train_id")
+    private List<Pricing> pricingList;
 
     public Integer getId() {
         return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public int getNumber() {
         return number;
     }
 
-    public String getDepartureTime() {
-        return departureTime;
+    public void setNumber(int number) {
+        this.number = number;
     }
 
     public String getArrivalPlace() {
         return arrivalPlace;
     }
 
-    public String getDepartureDate() {
+    public void setArrivalPlace(String arrivalPlace) {
+        this.arrivalPlace = arrivalPlace;
+    }
+
+    public Date getDepartureDate() {
         return departureDate;
     }
 
-    @Override
-    public String toString() {
-        return "Train{" +
-                "id=" + id +
-                ", number=" + number +
-                ", departureTime='" + departureTime + '\'' +
-                ", arrivalPlace='" + arrivalPlace + '\'' +
-                ", departureDate='" + departureDate + '\'' +
-                '}';
+    public void setDepartureDate(Date departureDate) {
+        this.departureDate = departureDate;
+    }
+
+    public Time getDepartureTime() {
+        return departureTime;
+    }
+
+    public void setDepartureTime(Time departureTime) {
+        this.departureTime = departureTime;
+    }
+
+    public int getKilometers() {
+        return kilometers;
+    }
+
+    public void setKilometers(int kilometers) {
+        this.kilometers = kilometers;
+    }
+
+    public List<Pricing> getPricingList() {
+        return pricingList;
+    }
+
+    public void setPricingList(List<Pricing> pricingList) {
+        this.pricingList = pricingList;
     }
 }

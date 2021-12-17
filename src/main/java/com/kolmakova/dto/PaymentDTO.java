@@ -1,14 +1,12 @@
 package com.kolmakova.dto;
 
-import com.kolmakova.entities.Passenger;
-import com.kolmakova.entities.Train;
-
 public class PaymentDTO {
 
     private Integer id;
-    private Train train;
-    private Passenger passenger;
-    private Double amount;
+    private com.kolmakova.dto.TrainDTO trainDTO;
+    private com.kolmakova.dto.PassengerDTO passengerDTO;
+    private PricingDTO pricingDTO;
+    private double amount;
     private boolean isDeleted;
 
     public Integer getId() {
@@ -19,44 +17,53 @@ public class PaymentDTO {
         this.id = id;
     }
 
-    public Double getAmount() {
+    public com.kolmakova.dto.TrainDTO getTrainDTO() {
+        return trainDTO;
+    }
+
+    public void setTrainDTO(TrainDTO trainDTO) {
+        this.trainDTO = trainDTO;
+    }
+
+    public com.kolmakova.dto.PassengerDTO getPassengerDTO() {
+        return passengerDTO;
+    }
+
+    public void setPassengerDTO(PassengerDTO passengerDTO) {
+        this.passengerDTO = passengerDTO;
+    }
+
+    public PricingDTO getPricingDTO() {
+        return pricingDTO;
+    }
+
+    public void setPricingDTO(PricingDTO pricingDTO) {
+        this.pricingDTO = pricingDTO;
+    }
+
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(Double amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 
-    public Train getTrain() {
-        return train;
-    }
-
-    public void setTrain(Train train) {
-        this.train = train;
-    }
-
-    public Passenger getPassenger() {
-        return passenger;
-    }
-
-    public void setPassenger(Passenger passenger) {
-        this.passenger = passenger;
-    }
-
-    public boolean getIsDeleted() {
+    public boolean isDeleted() {
         return isDeleted;
     }
 
-    public void setIsDeleted(boolean isDeleted) {
-        this.isDeleted = isDeleted;
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
     }
 
     @Override
     public String toString() {
         return "PaymentDTO{" +
                 "id=" + id +
-                ", train=" + train +
-                ", passenger=" + passenger +
+                ", trainDTO=" + trainDTO +
+                ", passengerDTO=" + passengerDTO +
+                ", pricingDTO=" + pricingDTO +
                 ", amount=" + amount +
                 ", isDeleted=" + isDeleted +
                 '}';
