@@ -4,10 +4,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -27,12 +24,13 @@ import java.io.IOException;
 import java.util.Properties;
 
 @Configuration
-@ComponentScan("com.kolmakova")
+@ComponentScan({"com.kolmakova.config", "com.kolmakova.*"})
 @EnableWebMvc
-@EnableJpaRepositories("com.kolmakova")
+@EnableJpaRepositories("com.kolmakova.repositories")
 @EnableTransactionManagement
 @PropertySource("classpath:application.properties")
-public class SpringConfig implements WebMvcConfigurer{
+@Import(value = { WebSecurityConfig.class })
+public class SpringConfig implements WebMvcConfigurer {
 
     @Autowired
     private ApplicationContext applicationContext;
@@ -52,7 +50,7 @@ public class SpringConfig implements WebMvcConfigurer{
         return dataSource;
     }
 
-    private Properties getHibernateProperty(){
+    private Properties getHibernateProperty() {
         Properties properties = new Properties();
         properties.put("hibernate.dialect", env.getProperty("spring.jpa.properties.hibernate.dialect"));
         properties.put("hibernate.show_sql", env.getProperty("spring.jpa.show-sql"));
@@ -65,7 +63,7 @@ public class SpringConfig implements WebMvcConfigurer{
     @Bean(name = "sessionFactory")
     public SessionFactory getSessionFactory(DataSource dataSource) throws IOException {
         LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
-        factoryBean.setPackagesToScan(new String[] {COMPONENT_SCAN_PACKAGE});
+        factoryBean.setPackagesToScan(new String[]{COMPONENT_SCAN_PACKAGE});
         factoryBean.setDataSource(dataSource);
         factoryBean.setHibernateProperties(getHibernateProperty());
         factoryBean.afterPropertiesSet();

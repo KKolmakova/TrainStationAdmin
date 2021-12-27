@@ -6,6 +6,11 @@
 </head>
 <body>
 
+<h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Sign Out"/>
+</form>
+
 <th:block th:if="${home}">
     <form th:method="GET" action="/home/passengers">
         <h3>Some home page</h3>
@@ -35,7 +40,7 @@
     <h4>Passenger:</h4>
     <p th:text="${response.getPassengerDTO().toString()}">
     <h4>Payments:</h4>
-    <div th:if="${not response.getPaymentDTOList().isEmpty or
+    <div th:if="${not response.getPaymentDTOList().isEmpty() or
          not response.getDeletedPaymentDTOList().isEmpty()}">
         <table border="1">
             <tr>
@@ -64,7 +69,7 @@
             </tr>
         </table>
     </div>
-    <div th:if="${response.getPaymentDTOList().isEmpty and
+    <div th:if="${response.getPaymentDTOList().isEmpty() and
          response.getDeletedPaymentDTOList().isEmpty()}">
         <p>There is no checks</p>
     </div>

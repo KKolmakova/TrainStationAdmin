@@ -17,7 +17,7 @@ public class HomeController {
     @GetMapping()
     public String home(Model model) {
         model.addAttribute("home", true);
-        return "trainStationAdmin";
+        return "home";
     }
 
     @GetMapping("/passengers")
