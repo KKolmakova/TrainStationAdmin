@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<th:block th:if="${home}">
+  <form th:method="GET" th:action="@{/home/passengers}">
+    <h3>Some home page</h3>
+    <p>Greeting</p>
+    <img src="..\Pictures\train.jpg" alt="*train picture*">
+    <input value="Open passengers" type="submit"/>
+  </form>
+</th:block>
+</body>
+</html>

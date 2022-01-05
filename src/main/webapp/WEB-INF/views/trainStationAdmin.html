@@ -12,7 +12,7 @@
 </form>
 
 <th:block th:if="${home}">
-    <form th:method="GET" action="/home/passengers">
+    <form th:method="GET" th:action="@{/home/passengers}">
         <h3>Some home page</h3>
         <p>Greeting</p>
         <img src="..\Pictures\train.jpg" alt="*train picture*">

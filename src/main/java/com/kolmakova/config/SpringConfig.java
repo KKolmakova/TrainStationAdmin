@@ -12,9 +12,7 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.ViewResolverRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.web.servlet.config.annotation.*;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
@@ -24,12 +22,11 @@ import java.io.IOException;
 import java.util.Properties;
 
 @Configuration
-@ComponentScan({"com.kolmakova.config", "com.kolmakova.*"})
+@ComponentScan("com.kolmakova.*")
 @EnableWebMvc
 @EnableJpaRepositories("com.kolmakova.repositories")
 @EnableTransactionManagement
 @PropertySource("classpath:application.properties")
-@Import(value = { WebSecurityConfig.class })
 public class SpringConfig implements WebMvcConfigurer {
 
     @Autowired
@@ -117,5 +114,18 @@ public class SpringConfig implements WebMvcConfigurer {
         ThymeleafViewResolver resolver = new ThymeleafViewResolver();
         resolver.setTemplateEngine(templateEngine(templateResolver()));
         registry.viewResolver(resolver);
+    }
+
+    @Override
+    public void addViewControllers(ViewControllerRegistry registry) {
+        registry.addViewController("/login").setViewName("login");
+    }
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/img/**")
+                .addResourceLocations("/resources/img/");
+        registry.addResourceHandler("/css/**")
+                .addResourceLocations("/resources/css/");
     }
 }

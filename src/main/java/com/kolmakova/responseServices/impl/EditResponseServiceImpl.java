@@ -2,7 +2,6 @@ package com.kolmakova.responseServices.impl;
 
 import com.kolmakova.dto.PassengerDTO;
 import com.kolmakova.dto.PaymentDTO;
-import com.kolmakova.entities.Passenger;
 import com.kolmakova.entities.Payment;
 import com.kolmakova.responseServices.EditResponseService;
 import com.kolmakova.responses.EditResponse;
