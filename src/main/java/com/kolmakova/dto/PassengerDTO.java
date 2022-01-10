@@ -1,5 +1,7 @@
 package com.kolmakova.dto;
 
+import com.kolmakova.types.DocumentType;
+
 import java.sql.Date;
 import java.util.List;
 
@@ -10,7 +12,7 @@ public class PassengerDTO {
     private String surname;
     private String sex;
     private Date birthDate;
-    private String documentType;
+    private DocumentDTO documentDTO;
     private String documentSeries;
     private List<PaymentDTO> paymentDTOList;
 
@@ -34,8 +36,12 @@ public class PassengerDTO {
         this.birthDate = birthDate;
     }
 
-    public void setDocumentType(String documentType) {
-        this.documentType = documentType;
+    public DocumentDTO getDocumentDTO() {
+        return documentDTO;
+    }
+
+    public void setDocumentDTO(DocumentDTO documentDTO) {
+        this.documentDTO = documentDTO;
     }
 
     public void setDocumentSeries(String documentSeries) {
@@ -62,8 +68,8 @@ public class PassengerDTO {
         return birthDate;
     }
 
-    public String getDocumentType() {
-        return documentType;
+    public DocumentDTO getDocumentType() {
+        return documentDTO;
     }
 
     public String getDocumentSeries() {
@@ -86,7 +92,7 @@ public class PassengerDTO {
                 ", surname='" + surname + '\'' +
                 ", sex='" + sex + '\'' +
                 ", birthDate='" + birthDate + '\'' +
-                ", documentType='" + documentType + '\'' +
+                ", documentType='" + documentDTO + '\'' +
                 ", documentSeries='" + documentSeries + '\'' +
                 '}';
     }

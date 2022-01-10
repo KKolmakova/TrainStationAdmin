@@ -1,5 +1,6 @@
 package com.kolmakova.entities;
 
+import com.kolmakova.types.DocumentType;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
@@ -24,14 +25,15 @@ public class Passenger {
     @Column(name = "birth_date")
     private Date birthDate;
 
-    @Column(name = "document_type")
-    private String documentType;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "document_type_id")
+    private Document documentType;
 
     @Column(name = "document_series")
     private String documentSeries;
 
     @OneToMany(fetch = FetchType.LAZY)
-    @Where(clause = "mark_as_deleted = false")
+//    @Where(clause = "mark_as_deleted = false")
     @JoinColumn(name = "passenger_id")
     private List<Payment> paymentList;
 
@@ -55,7 +57,7 @@ public class Passenger {
         this.birthDate = birthDate;
     }
 
-    public void setDocumentType(String documentType) {
+    public void setDocumentType(Document documentType) {
         this.documentType = documentType;
     }
 
@@ -83,7 +85,7 @@ public class Passenger {
         return birthDate;
     }
 
-    public String getDocumentType() {
+    public Document getDocumentType() {
         return documentType;
     }
 

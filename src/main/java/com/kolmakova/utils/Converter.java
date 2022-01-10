@@ -1,15 +1,7 @@
 package com.kolmakova.utils;
 
-import com.kolmakova.dto.PassengerDTO;
-import com.kolmakova.dto.PaymentDTO;
-import com.kolmakova.dto.TrainDTO;
-import com.kolmakova.dto.ComfortDTO;
-import com.kolmakova.dto.PricingDTO;
-import com.kolmakova.entities.Comfort;
-import com.kolmakova.entities.Passenger;
-import com.kolmakova.entities.Payment;
-import com.kolmakova.entities.Pricing;
-import com.kolmakova.entities.Train;
+import com.kolmakova.dto.*;
+import com.kolmakova.entities.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
@@ -35,10 +27,12 @@ public class Converter {
 
     public PassengerDTO convertToPassengerDTO(Passenger passenger) {
         PassengerDTO passengerDTO = new PassengerDTO();
+        DocumentDTO documentDTO = convertDocumentDTO(passenger.getDocumentType());
         List<PaymentDTO> paymentDTOList = convertToPaymentDTOList(passenger.getPaymentList());
 
         BeanUtils.copyProperties(passenger, passengerDTO);
         passengerDTO.setPaymentDTOList(paymentDTOList);
+        passengerDTO.setDocumentDTO(documentDTO);
 
         return passengerDTO;
     }
@@ -74,6 +68,23 @@ public class Converter {
         return comfortDTO;
     }
 
+    public DocumentDTO convertDocumentDTO(Document document) {
+        DocumentDTO documentDTO = new DocumentDTO();
+        BeanUtils.copyProperties(document, documentDTO);
+
+        return documentDTO;
+    }
+
+    public List<DocumentDTO> convertToDocumentDTOList(List<Document> documentList) {
+        List<DocumentDTO> documentDTOList = new ArrayList<>();
+
+        for (Document document : documentList) {
+            documentDTOList.add(convertDocumentDTO(document));
+        }
+
+        return documentDTOList;
+    }
+
     public List<PaymentDTO> convertToPaymentDTOList(List<Payment> paymentList) {
         List<PaymentDTO> paymentDTOList = new ArrayList<>();
 
@@ -84,14 +95,14 @@ public class Converter {
         return paymentDTOList;
     }
 
-    public List<TrainDTO> convertToTrainDTOList(List<Train> trainList) {
-        List<TrainDTO> trainDTOList = new ArrayList<>();
+    public List<PassengerDTO> convertToPassengerDTOList(List<Passenger> passengerList) {
+        List<PassengerDTO> passengerDTOList = new ArrayList<>();
 
-        for (Train train : trainList) {
-            trainDTOList.add(convertToTrainDTO(train));
+        for (Passenger passenger : passengerList) {
+            passengerDTOList.add(convertToPassengerDTO(passenger));
         }
 
-        return trainDTOList;
+        return passengerDTOList;
     }
 
     public Passenger convertToPassenger(PassengerDTO passengerDTO) {
@@ -100,4 +111,6 @@ public class Converter {
 
         return passenger;
     }
+
+
 }

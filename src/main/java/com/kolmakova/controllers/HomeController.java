@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class HomeController {
+
     @GetMapping
     public String redirectToHome(HttpServletRequest request) {
         return "redirect: " + request.getContextPath() + "/home";

@@ -3,8 +3,8 @@ package com.kolmakova.dto;
 public class PaymentDTO {
 
     private Integer id;
-    private com.kolmakova.dto.TrainDTO trainDTO;
-    private com.kolmakova.dto.PassengerDTO passengerDTO;
+    private TrainDTO trainDTO;
+    private PassengerDTO passengerDTO;
     private PricingDTO pricingDTO;
     private double amount;
     private boolean isDeleted;
