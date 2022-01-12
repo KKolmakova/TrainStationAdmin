@@ -1,25 +1,32 @@
-<div th:fragment="navbar" xmlns:th="http://www.w3.org/1999/xhtml">
+<div th:fragment="navbar">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-xxl">
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <div class="col">
-                    <ul class="nav nav-tabs">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/TrainStationAdmin/home">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/TrainStationAdmin/home/passengers">Passengers list</a>
-                        </li>
-                    </ul>
-                </div>
 
-                <div class="col-1">
-                    <ul class="nav justify-content-end">
-                        <li class="nav-item">
-                            <button type="button" class="btn btn-outline-dark">Sign out</button>
-                        </li>
-                    </ul>
-                </div>
+        <div class="container-xxl">
+            <img th:src="@{/img/train1.png}" width="100" height="60"/>
+
+            <!-- <a class="navbar-brand" href="#">Railway</a> -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/TrainStation/search">Home</a>
+                    </li>
+                </ul>
+
+                <ul class="nav justify-content-end">
+                    <li class="nav-item">
+                        <img id="en" th:src="@{/img/eng.png}" width="35" height="20">
+                        <img id="ru" th:src="@{/img/rus.png}" width="35" height="20">
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" th:href="@{/user/signUp}">Sign out</a>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>

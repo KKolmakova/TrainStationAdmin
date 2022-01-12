@@ -15,21 +15,24 @@
 <th:block th:if="${home}">
     <form th:method="GET" th:action="@{/home/passengers}">
         <div class="container-xxl">
-            <div class="card mt-4 mb-3" style="max-width: 1500px;">
+            <div class="card mt-4 mb-3" style="max-width: 1000px;">
                 <div class="row g-0">
-                    <div class="col-md-6">
+                    <div class="col">
                         <div class="card-body">
-                            <h5 class="card-title">Hello, Admin!</h5>
+                            <h5 class="card-title">
+                                <th:block th:text="#{admin.home.label.hello}"/>
+                            </h5>
                             <p class="card-text">The functionality of this site will make it possible to manage the
                                 registered checks of passengers.</p>
                             <button class="btn btn-primary" type="submit">Open passengers list</button>
                         </div>
                     </div>
-                    <div class="col-md-6">
-                        <img src="..." class="img-fluid rounded-start" alt="...">
+                    <div class="col">
+                        <img th:src="@{/img/railway.png}" class="img-fluid rounded-start" alt="#">
                     </div>
                 </div>
             </div>
+        </div>
     </form>
 </th:block>
 </body>

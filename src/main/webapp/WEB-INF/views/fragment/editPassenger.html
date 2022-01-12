@@ -83,7 +83,7 @@
                             <div th:each="payment: ${response.getDeletedPaymentDTOList()}">
                                 <tr>
                                     <td>
-                                        <p class="text-primary">Active</p>
+                                        <p class="text-secondary">Deleted</p>
                                     </td>
                                     <td>
                                         <p th:text="${payment.getTrainDTO().getNumber()}"></p>
@@ -124,7 +124,7 @@
                             <div th:each="payment: ${response.getPaymentDTOList()}">
                                 <tr>
                                     <td>
-                                        <p class="text-secondary">Deleted</p>
+                                        <p class="text-primary">Active</p>
                                     </td>
                                     <td>
                                         <p th:text="${payment.getTrainDTO().getNumber()}"></p>

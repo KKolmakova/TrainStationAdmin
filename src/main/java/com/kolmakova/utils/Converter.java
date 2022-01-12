@@ -112,5 +112,11 @@ public class Converter {
         return passenger;
     }
 
+    public Account convertToAccount(AccountDTO accountDto) {
+        Account account = new Account();
 
+        BeanUtils.copyProperties(accountDto, account);
+
+        return account;
+    }
 }

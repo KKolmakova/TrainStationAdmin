@@ -3,8 +3,13 @@ package com.kolmakova.config;
 import org.hibernate.SessionFactory;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.*;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -12,13 +17,17 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.*;
+import org.springframework.web.servlet.i18n.CookieLocaleResolver;
+import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 
 import javax.sql.DataSource;
 import java.io.IOException;
+import java.util.Locale;
 import java.util.Properties;
 
 @Configuration
@@ -93,6 +102,7 @@ public class SpringConfig implements WebMvcConfigurer {
     public SpringResourceTemplateResolver templateResolver() {
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
         templateResolver.setApplicationContext(applicationContext);
+        templateResolver.setCharacterEncoding("UTF-8");
         templateResolver.setPrefix("/WEB-INF/views/");
         templateResolver.setSuffix(".html");
 
@@ -113,6 +123,7 @@ public class SpringConfig implements WebMvcConfigurer {
     public void configureViewResolvers(ViewResolverRegistry registry) {
         ThymeleafViewResolver resolver = new ThymeleafViewResolver();
         resolver.setTemplateEngine(templateEngine(templateResolver()));
+        resolver.setCharacterEncoding("UTF-8");
         registry.viewResolver(resolver);
     }
 
@@ -127,5 +138,39 @@ public class SpringConfig implements WebMvcConfigurer {
                 .addResourceLocations("/resources/img/");
         registry.addResourceHandler("/css/**")
                 .addResourceLocations("/resources/css/");
+    }
+
+    @Autowired
+    @Qualifier("userAccessPaymentInterceptor")
+    private HandlerInterceptor userAccessPaymentInterceptor;
+
+    //    localization
+
+    @Bean(name = "messageSource")
+    public ReloadableResourceBundleMessageSource messageSource() {
+        ReloadableResourceBundleMessageSource source = new ReloadableResourceBundleMessageSource();
+        source.setDefaultEncoding("UTF-8");
+        source.addBasenames("classpath:/locales/locale");
+        return source;
+    }
+
+    @Bean(name = "localeResolver")
+    public CookieLocaleResolver localeResolver() {
+        CookieLocaleResolver localeResolver = new CookieLocaleResolver();
+        localeResolver.setDefaultLocale(new Locale("ru"));
+        return localeResolver;
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+//      locale
+        LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
+        localeChangeInterceptor.setParamName("lang");
+        localeChangeInterceptor.setIgnoreInvalidLocale(true);
+
+        registry.addInterceptor(localeChangeInterceptor).addPathPatterns("/*");
+
+//        security
+//        registry.addInterceptor(userAccessPaymentInterceptor).addPathPatterns("/payment/**");
     }
 }
