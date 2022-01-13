@@ -4,8 +4,8 @@ import com.kolmakova.dto.DocumentDTO;
 import com.kolmakova.dto.PassengerDTO;
 import com.kolmakova.entities.Passenger;
 import com.kolmakova.repositories.DocumentRepository;
-import com.kolmakova.responseServices.PassengerResponseService;
-import com.kolmakova.responses.PassengerResponse;
+import com.kolmakova.responseServices.SortPassengerListResponseService;
+import com.kolmakova.responses.PassengerListResponse;
 import com.kolmakova.services.PassengerService;
 import com.kolmakova.utils.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class PassengerResponseServiceImpl implements PassengerResponseService {
+public class SortPassengerListResponseServiceImpl implements SortPassengerListResponseService {
 
     @Autowired
     private PassengerService passengerService;
@@ -27,17 +27,17 @@ public class PassengerResponseServiceImpl implements PassengerResponseService {
     private Converter converter;
 
     @Override
-    public PassengerResponse getResponse() {
-        PassengerResponse passengerResponse = new PassengerResponse();
-        passengerResponse.setPassengerDTOList(getAllPassengersDTO());
-        passengerResponse.setDocumentDTOList(getAllDocumentDTO());
+    public PassengerListResponse getResponse() {
+        PassengerListResponse passengerListResponse = new PassengerListResponse();
+        passengerListResponse.setPassengerDTOList(getAllPassengersDTO());
+        passengerListResponse.setDocumentDTOList(getAllDocumentDTO());
 
-        return passengerResponse;
+        return passengerListResponse;
     }
 
     @Override
-    public PassengerResponse getSortedResponse(PassengerDTO passengerDTO) {
-        PassengerResponse passengerResponse = new PassengerResponse();
+    public PassengerListResponse getSortedResponse(PassengerDTO passengerDTO) {
+        PassengerListResponse passengerListResponse = new PassengerListResponse();
 
         List<Passenger> passengers = passengerService.getByParameters(
                 passengerDTO.getName(),
@@ -46,10 +46,10 @@ public class PassengerResponseServiceImpl implements PassengerResponseService {
                 passengerDTO.getDocumentSeries());
 
         List<PassengerDTO> passengerDTOList = converter.convertToPassengerDTOList(passengers);
-        passengerResponse.setPassengerDTOList(passengerDTOList);
-        passengerResponse.setDocumentDTOList(getAllDocumentDTO());
+        passengerListResponse.setPassengerDTOList(passengerDTOList);
+        passengerListResponse.setDocumentDTOList(getAllDocumentDTO());
 
-        return passengerResponse;
+        return passengerListResponse;
     }
 
     private List<PassengerDTO> getAllPassengersDTO() {

@@ -12,6 +12,7 @@ import java.util.Map;
 
 @Component("userAccessPaymentInterceptor")
 public class UserAccessPaymentInterceptor implements HandlerInterceptor {
+    
     private static final String ID_PATH_VARIABLE = "id";
     private static final String PASSENGER_ID_PATH_VARIABLE = "passengerId";
 

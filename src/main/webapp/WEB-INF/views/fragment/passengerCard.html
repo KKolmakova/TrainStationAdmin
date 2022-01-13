@@ -1,0 +1,33 @@
+<div th:fragment="passengerCard" xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="row mt-2">
+        <div class="card border-dark mb-3 mt-2" style="max-width: 18rem;padding-right: 0px;padding-left: 0px;">
+            <div class="card-header" th:text="#{admin.passengers.label.sortArea}"></div>
+            <div class="card-body text-dark">
+                <form th:method="POST" th:action="@{/home/passengers/sort}">
+                    <label for="name" class="form-label mt-1" th:text="#{admin.passengers.label.name}"></label>
+                    <input class="form-control" id="name" name="name">
+
+                    <label for="surname" class="form-label mt-1" th:text="#{admin.passengers.label.surname}"></label>
+                    <input class="form-control" id="surname" name="surname">
+
+                    <label for="documentType" class="form-label mt-3"
+                           th:text="#{admin.passengers.label.documentType}"></label>
+                    <select class="form-select" id="documentType" name="documentDTO.type">
+                        <option selected></option>
+                        <div th:each="document: ${response.getDocumentDTOList()}">
+                            <option th:value="${document.getType()}"
+                                    th:text="${document.getType().getDisplayName()}"></option>
+                        </div>
+                    </select>
+
+                    <label for="documentSeries" class="form-label mt-3"
+                           th:text="#{admin.passengers.label.documentSeries}"></label>
+                    <input class="form-control" id="documentSeries" name="documentSeries">
+
+                    <button class="btn btn-outline-dark mt-4" type="submit"
+                            th:text="#{admin.passengers.button.find}"></button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

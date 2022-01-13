@@ -1,12 +1,6 @@
 package com.kolmakova.entities;
 
-import com.kolmakova.types.UserRole;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -15,23 +9,20 @@ public class Account {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Integer id;
     private String username;
     private String password;
     private String role;
-    @Column(name = "account_non_expired")
-    private boolean accountNonExpired;
-    @Column(name = "account_non_locked")
-    private boolean accountNonLocked;
-    @Column(name = "credentials_non_expired")
-    private boolean credentialsNonExpired;
-    private boolean enabled;
 
-    public long getId() {
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "account_id", referencedColumnName = "id")
+    private List<Passenger> passengers;
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -59,35 +50,11 @@ public class Account {
         this.role = role;
     }
 
-    public boolean isAccountNonExpired() {
-        return accountNonExpired;
+    public List<Passenger> getPassengers() {
+        return passengers;
     }
 
-    public void setAccountNonExpired(boolean accountNonExpired) {
-        this.accountNonExpired = accountNonExpired;
-    }
-
-    public boolean isAccountNonLocked() {
-        return accountNonLocked;
-    }
-
-    public void setAccountNonLocked(boolean accountNonLocked) {
-        this.accountNonLocked = accountNonLocked;
-    }
-
-    public boolean isCredentialsNonExpired() {
-        return credentialsNonExpired;
-    }
-
-    public void setCredentialsNonExpired(boolean credentialsNonExpired) {
-        this.credentialsNonExpired = credentialsNonExpired;
-    }
-
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
+    public void setPassengers(List<Passenger> passengers) {
+        this.passengers = passengers;
     }
 }

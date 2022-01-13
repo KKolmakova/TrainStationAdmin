@@ -76,42 +76,42 @@ public class Payment {
     public void setDeleted(boolean deleted) {
         isDeleted = deleted;
     }
-
-    public static Builder builder(){
-        return new Payment().new Builder();
-    }
-
-    public class Builder {
-
-        private Builder() { }
-
-        public Builder setId(Integer id){
-            Payment.this.id = id;
-            return this;
-        }
-
-        public Builder setTrain(Train train){
-            Payment.this.train = train;
-            return this;
-        }
-
-        public Builder setPassenger(Passenger passenger){
-            Payment.this.passenger = passenger;
-            return this;
-        }
-
-        public Builder setPricing(Pricing pricing){
-            Payment.this.pricing = pricing;
-            return this;
-        }
-
-        public Builder setAmount(Double amount){
-            Payment.this.amount = amount;
-            return this;
-        }
-
-        public Payment build(){
-            return Payment.this;
-        }
-    }
+//
+//    public static Builder builder(){
+//        return new Payment().new Builder();
+//    }
+//
+//    public class Builder {
+//
+//        private Builder() { }
+//
+//        public Builder setId(Integer id){
+//            Payment.this.id = id;
+//            return this;
+//        }
+//
+//        public Builder setTrain(Train train){
+//            Payment.this.train = train;
+//            return this;
+//        }
+//
+//        public Builder setPassenger(Passenger passenger){
+//            Payment.this.passenger = passenger;
+//            return this;
+//        }
+//
+//        public Builder setPricing(Pricing pricing){
+//            Payment.this.pricing = pricing;
+//            return this;
+//        }
+//
+//        public Builder setAmount(Double amount){
+//            Payment.this.amount = amount;
+//            return this;
+//        }
+//
+//        public Payment build(){
+//            return Payment.this;
+//        }
+//    }
 }

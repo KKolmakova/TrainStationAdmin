@@ -33,7 +33,6 @@ public class Passenger {
     private String documentSeries;
 
     @OneToMany(fetch = FetchType.LAZY)
-//    @Where(clause = "mark_as_deleted = false")
     @JoinColumn(name = "passenger_id")
     private List<Payment> paymentList;
 

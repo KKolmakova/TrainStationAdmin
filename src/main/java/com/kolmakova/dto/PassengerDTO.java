@@ -83,17 +83,4 @@ public class PassengerDTO {
     public void setPaymentDTOList(List<PaymentDTO> paymentDTOList) {
         this.paymentDTOList = paymentDTOList;
     }
-
-    @Override
-    public String toString() {
-        return "PassengerDTO{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", sex='" + sex + '\'' +
-                ", birthDate='" + birthDate + '\'' +
-                ", documentType='" + documentDTO + '\'' +
-                ", documentSeries='" + documentSeries + '\'' +
-                '}';
-    }
 }

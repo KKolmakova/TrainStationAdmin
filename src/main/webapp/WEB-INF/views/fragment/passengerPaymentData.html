@@ -1,0 +1,28 @@
+<div th:fragment="passengerPaymentData" xmlns:th="http://www.w3.org/1999/xhtml">
+    <td>
+        <p th:text="${train.getNumber()}"></p>
+    </td>
+    <td>
+        <p th:text="${train.getArrivalPlace()}"></p>
+    </td>
+    <td>
+        <p th:text="${train.getDepartureDate()}"></p>
+    </td>
+    <td>
+        <p th:text="${train.getDepartureTime()}"></p>
+    </td>
+    <td>
+        <p th:text="${train.getKilometers()}"></p>
+    </td>
+    <td>
+        <p th:text="${payment.getPricingDTO().getComfortDTO().getType()}"></p>
+    </td>
+    <td>
+        <p th:text="${payment.getPricingDTO().getSeatsNumber()}"></p>
+        <input hidden id="freeSeats"
+               th:value="${payment.getPricingDTO().getSeatsNumber()}">
+    </td>
+    <td>
+        <p th:text="${payment.getAmount() + ' BYN'}"></p>
+    </td>
+</div>

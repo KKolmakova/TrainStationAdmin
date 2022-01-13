@@ -6,7 +6,7 @@ import com.kolmakova.dto.TrainDTO;
 
 import java.util.List;
 
-public class EditResponse {
+public class EditPassengerResponse {
 
     private List<PaymentDTO> deletedPaymentDTOList;
     private List<PaymentDTO> paymentDTOList;

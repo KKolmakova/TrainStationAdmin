@@ -47,15 +47,4 @@ public class PricingDTO {
     public void setPrice(double price) {
         this.price = price;
     }
-
-    @Override
-    public String toString() {
-        return "PricingDTO{" +
-                "id=" + id +
-                ", trainId=" + trainId +
-                ", comfortDTO=" + comfortDTO.getType() +
-                ", seatsNumber=" + seatsNumber +
-                ", price=" + price +
-                '}';
-    }
 }

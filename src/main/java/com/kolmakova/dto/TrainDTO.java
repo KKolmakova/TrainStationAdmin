@@ -4,8 +4,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import java.sql.Date;
 import java.time.LocalTime;
+import java.util.Date;
 import java.util.List;
 
 public class TrainDTO {
@@ -13,11 +13,12 @@ public class TrainDTO {
     private Integer id;
     private int number;
     private String arrivalPlace;
-    @DateTimeFormat(pattern="yyyy-MM-dd")
-    private Date departureDate;
-    @DateTimeFormat(pattern="HH:mm")
-    @Temporal(TemporalType.TIME)
-    private LocalTime departureTime;
+    @DateTimeFormat(pattern = "yyyy-MM-dd", iso = DateTimeFormat.ISO.DATE)
+    private java.util.Date departureDate;
+    @DateTimeFormat(pattern = "HH:mm", iso = DateTimeFormat.ISO.TIME)
+    private java.util.Date departureTime;
+    private String departureDateStr;
+    private String departureTimeStr;
     private int kilometers;
     private List<PricingDTO> pricingDTOList;
 
@@ -45,19 +46,19 @@ public class TrainDTO {
         this.arrivalPlace = arrivalPlace;
     }
 
-    public Date getDepartureDate() {
+    public java.util.Date getDepartureDate() {
         return departureDate;
     }
 
-    public void setDepartureDate(Date departureDate) {
+    public void setDepartureDate(java.util.Date departureDate) {
         this.departureDate = departureDate;
     }
 
-    public LocalTime getDepartureTime() {
+    public java.util.Date getDepartureTime() {
         return departureTime;
     }
 
-    public void setDepartureTime(LocalTime departureTime) {
+    public void setDepartureTime(Date departureTime) {
         this.departureTime = departureTime;
     }
 
@@ -77,16 +78,20 @@ public class TrainDTO {
         this.pricingDTOList = pricingDTOList;
     }
 
-    @Override
-    public String toString() {
-        return "TrainDTO{" +
-                "id=" + id +
-                ", number=" + number +
-                ", arrivalPlace='" + arrivalPlace + '\'' +
-                ", departureDate=" + departureDate +
-                ", departureTime='" + departureTime + '\'' +
-                ", kilometers=" + kilometers +
-                '}';
+    public String getDepartureDateStr() {
+        return departureDateStr;
+    }
+
+    public void setDepartureDateStr(String departureDateStr) {
+        this.departureDateStr = departureDateStr;
+    }
+
+    public String getDepartureTimeStr() {
+        return departureTimeStr;
+    }
+
+    public void setDepartureTimeStr(String departureTimeStr) {
+        this.departureTimeStr = departureTimeStr;
     }
 }
 

@@ -149,8 +149,10 @@ public class SpringConfig implements WebMvcConfigurer {
     @Bean(name = "messageSource")
     public ReloadableResourceBundleMessageSource messageSource() {
         ReloadableResourceBundleMessageSource source = new ReloadableResourceBundleMessageSource();
+
         source.setDefaultEncoding("UTF-8");
         source.addBasenames("classpath:/locales/locale");
+
         return source;
     }
 
@@ -168,9 +170,10 @@ public class SpringConfig implements WebMvcConfigurer {
         localeChangeInterceptor.setParamName("lang");
         localeChangeInterceptor.setIgnoreInvalidLocale(true);
 
-        registry.addInterceptor(localeChangeInterceptor).addPathPatterns("/*");
+        registry.addInterceptor(localeChangeInterceptor);
 
 //        security
 //        registry.addInterceptor(userAccessPaymentInterceptor).addPathPatterns("/payment/**");
     }
+
 }

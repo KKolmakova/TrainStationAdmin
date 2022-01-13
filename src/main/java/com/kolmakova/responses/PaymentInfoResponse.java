@@ -5,7 +5,7 @@ import com.kolmakova.entities.Passenger;
 import com.kolmakova.entities.Payment;
 import com.kolmakova.entities.Train;
 
-public class PaymentResponse {
+public class PaymentInfoResponse {
 
     private PaymentDTO paymentDTO;
 

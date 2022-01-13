@@ -6,16 +6,22 @@ import org.springframework.security.core.userdetails.User;
 import java.util.Collection;
 
 public class TrainStationUser extends User {
+
     private Integer accountId;
 
     public TrainStationUser(String username, String password, Collection<? extends GrantedAuthority> authorities) {
         super(username, password, authorities);
     }
 
-    public TrainStationUser(String username, String password, boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired, boolean accountNonLocked, Collection<? extends GrantedAuthority> authorities) {
+    public TrainStationUser(String username,
+                            String password,
+                            boolean enabled,
+                            boolean accountNonExpired,
+                            boolean credentialsNonExpired,
+                            boolean accountNonLocked,
+                            Collection<? extends GrantedAuthority> authorities) {
         super(username, password, enabled, accountNonExpired, credentialsNonExpired, accountNonLocked, authorities);
     }
-
 
     public Integer getAccountId() {
         return accountId;

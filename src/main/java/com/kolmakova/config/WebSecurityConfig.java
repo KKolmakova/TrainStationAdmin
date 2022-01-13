@@ -14,8 +14,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import javax.sql.DataSource;
-
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -30,13 +28,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/", "/authentication").permitAll()
-//                .antMatchers("/home/**", "/payment/**").hasAuthority(Constants.USER_AUTHORITY)
+                .antMatchers("/user/signIn", "/user/generate").permitAll()
+                .antMatchers("/**").hasAuthority(Constants.USER_AUTHORITY)
+
                 .and()
                 .formLogin()
                 .loginPage("/user/signIn")
                 .loginProcessingUrl("/login")
-                .permitAll();
+                .permitAll()
+
+                .and()
+                .logout()
+                .logoutUrl("/logout")
+                .invalidateHttpSession(true);
     }
 
 

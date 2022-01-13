@@ -1,10 +1,9 @@
 package com.kolmakova.controllers;
 
-import com.kolmakova.dto.PassengerDTO;
-import com.kolmakova.responseServices.DeleteResponseService;
-import com.kolmakova.responseServices.EditResponseService;
-import com.kolmakova.responseServices.PassengerResponseService;
-import com.kolmakova.responseServices.RestoreResponseService;
+import com.kolmakova.responseServices.DeletePaymentResponseService;
+import com.kolmakova.responseServices.EditPassengerResponseService;
+import com.kolmakova.responseServices.SortPassengerListResponseService;
+import com.kolmakova.responseServices.RestorePaymentResponseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,19 +14,19 @@ import org.springframework.web.bind.annotation.*;
 public class EditPaymentController {
 
     @Autowired
-    private EditResponseService editResponseService;
+    private EditPassengerResponseService editPassengerResponseService;
     @Autowired
-    private DeleteResponseService deleteResponseService;
+    private DeletePaymentResponseService deletePaymentResponseService;
     @Autowired
-    private RestoreResponseService restoreResponseService;
+    private RestorePaymentResponseService restorePaymentResponseService;
     @Autowired
-    private PassengerResponseService passengerResponseService;
+    private SortPassengerListResponseService sortPassengerListResponseService;
 
     @GetMapping("/print")
     public String getPassenger(Model model,
                                @PathVariable("passengerId") Integer passengerId) {
         model.addAttribute("edit", true);
-        model.addAttribute("response", editResponseService.getResponse(passengerId));
+        model.addAttribute("response", editPassengerResponseService.getResponse(passengerId));
 
         return "trainStationAdmin";
     }
@@ -36,7 +35,7 @@ public class EditPaymentController {
     public String deletePayment(Model model,
                                 @PathVariable("paymentId") Integer paymentId,
                                 @PathVariable("passengerId") Integer passengerId) {
-        model.addAttribute("response", deleteResponseService.getResponse(paymentId));
+        model.addAttribute("response", deletePaymentResponseService.getResponse(paymentId));
 
         return "redirect:/passenger/" + passengerId + "/print";
     }
@@ -45,7 +44,7 @@ public class EditPaymentController {
     public String restorePayment(Model model,
                                  @PathVariable("paymentId") Integer paymentId,
                                  @PathVariable("passengerId") Integer passengerId) {
-        model.addAttribute("response", restoreResponseService.getResponse(paymentId));
+        model.addAttribute("response", restorePaymentResponseService.getResponse(paymentId));
 
         return "redirect:/passenger/" + passengerId + "/print";
     }
@@ -53,7 +52,7 @@ public class EditPaymentController {
     @GetMapping("/return")
     public String returnToAllPassengers(Model model) {
         model.addAttribute("passengers", true);
-        model.addAttribute("response", passengerResponseService.getResponse());
+        model.addAttribute("response", sortPassengerListResponseService.getResponse());
 
         return "redirect:/home/passengers";
     }

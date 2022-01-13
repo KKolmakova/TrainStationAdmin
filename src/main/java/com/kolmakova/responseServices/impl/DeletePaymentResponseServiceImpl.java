@@ -3,8 +3,8 @@ package com.kolmakova.responseServices.impl;
 import com.kolmakova.dto.PaymentDTO;
 import com.kolmakova.entities.Payment;
 import com.kolmakova.entities.Pricing;
-import com.kolmakova.responseServices.DeleteResponseService;
-import com.kolmakova.responses.PaymentResponse;
+import com.kolmakova.responseServices.DeletePaymentResponseService;
+import com.kolmakova.responses.PaymentInfoResponse;
 import com.kolmakova.services.PaymentService;
 import com.kolmakova.utils.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import javax.transaction.Transactional;
 
 @Service
 @Transactional
-public class DeleteResponseServiceImpl implements DeleteResponseService {
+public class DeletePaymentResponseServiceImpl implements DeletePaymentResponseService {
 
     @Autowired
     private PaymentService paymentService;
@@ -22,15 +22,15 @@ public class DeleteResponseServiceImpl implements DeleteResponseService {
     private Converter converter;
 
     @Override
-    public PaymentResponse getResponse(Integer paymentId) {
-        PaymentResponse paymentResponse = new PaymentResponse();
+    public PaymentInfoResponse getResponse(Integer paymentId) {
+        PaymentInfoResponse paymentInfoResponse = new PaymentInfoResponse();
 
         Payment payment = paymentService.getPaymentById(paymentId);
         PaymentDTO paymentDTO = converter.convertToPaymentDTO(markAsDeleted(payment));
 
-        paymentResponse.setPaymentDTO(paymentDTO);
+        paymentInfoResponse.setPaymentDTO(paymentDTO);
 
-        return paymentResponse;
+        return paymentInfoResponse;
     }
 
     private Payment markAsDeleted(Payment payment) {

@@ -3,8 +3,8 @@ package com.kolmakova.responseServices.impl;
 import com.kolmakova.dto.PaymentDTO;
 import com.kolmakova.entities.Payment;
 import com.kolmakova.entities.Pricing;
-import com.kolmakova.responseServices.RestoreResponseService;
-import com.kolmakova.responses.PaymentResponse;
+import com.kolmakova.responseServices.RestorePaymentResponseService;
+import com.kolmakova.responses.PaymentInfoResponse;
 import com.kolmakova.services.PaymentService;
 import com.kolmakova.utils.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import javax.transaction.Transactional;
 
 @Transactional
 @Service
-public class RestoreResponseServiceImpl implements RestoreResponseService {
+public class RestorePaymentResponseServiceImpl implements RestorePaymentResponseService {
 
     @Autowired
     private PaymentService paymentService;
@@ -22,15 +22,15 @@ public class RestoreResponseServiceImpl implements RestoreResponseService {
     private Converter converter;
 
     @Override
-    public PaymentResponse getResponse(Integer paymentId) {
-        PaymentResponse paymentResponse = new PaymentResponse();
+    public PaymentInfoResponse getResponse(Integer paymentId) {
+        PaymentInfoResponse paymentInfoResponse = new PaymentInfoResponse();
 
         Payment payment = paymentService.getPaymentById(paymentId);
         PaymentDTO paymentDTO = converter.convertToPaymentDTO(markAsActing(payment));
 
-        paymentResponse.setPaymentDTO(paymentDTO);
+        paymentInfoResponse.setPaymentDTO(paymentDTO);
 
-        return paymentResponse;
+        return paymentInfoResponse;
     }
 
     private Payment markAsActing(Payment payment) {

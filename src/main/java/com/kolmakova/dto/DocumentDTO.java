@@ -22,12 +22,4 @@ public class DocumentDTO {
     public void setType(DocumentType type) {
         this.type = type;
     }
-
-    @Override
-    public String toString() {
-        return "DocumentDTO{" +
-                "id=" + id +
-                ", type=" + type +
-                '}';
-    }
 }

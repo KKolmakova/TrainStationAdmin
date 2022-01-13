@@ -19,7 +19,7 @@ echo --
 call mvn clean package -DskipTests && ^
 
 echo REMOVE OLD FOLDER: %TOMCAT_OLD_FOLDER% && ^
-rmdir %TOMCAT_OLD_FOLDER% /S /Q && ^
+rmdir %TOMCAT_OLD_FOLDER% /S /Q
 
 echo COPY %WAR_LOCATION% to %TOMCAT_PROJECT_LOCATION% && ^
 copy /Y %WAR_LOCATION% %TOMCAT_PROJECT_LOCATION%

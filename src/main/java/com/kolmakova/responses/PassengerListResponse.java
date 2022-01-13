@@ -5,7 +5,7 @@ import com.kolmakova.dto.PassengerDTO;
 
 import java.util.List;
 
-public class PassengerResponse {
+public class PassengerListResponse {
 
     private List<PassengerDTO> passengerDTOList;
     private List<DocumentDTO> documentDTOList;

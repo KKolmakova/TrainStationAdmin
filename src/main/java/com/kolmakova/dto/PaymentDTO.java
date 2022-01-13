@@ -56,16 +56,4 @@ public class PaymentDTO {
     public void setDeleted(boolean deleted) {
         isDeleted = deleted;
     }
-
-    @Override
-    public String toString() {
-        return "PaymentDTO{" +
-                "id=" + id +
-                ", trainDTO=" + trainDTO +
-                ", passengerDTO=" + passengerDTO +
-                ", pricingDTO=" + pricingDTO +
-                ", amount=" + amount +
-                ", isDeleted=" + isDeleted +
-                '}';
-    }
 }

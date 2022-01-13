@@ -3,6 +3,7 @@ package com.kolmakova.dto;
 import com.kolmakova.types.Constants;
 
 public class AccountDTO {
+
     private long id;
     private String username;
     private String password;

@@ -22,12 +22,4 @@ public class ComfortDTO {
     public void setType(ComfortType type) {
         this.type = type;
     }
-
-    @Override
-    public String toString() {
-        return "ComfortDTO{" +
-                "id=" + id +
-                ", type=" + type +
-                '}';
-    }
 }

@@ -8,6 +8,7 @@ import javax.persistence.*;
 @Table(name = "Document")
 @Entity
 public class Document {
+
     @Id
     @Column(name = "id")
     private Integer id;

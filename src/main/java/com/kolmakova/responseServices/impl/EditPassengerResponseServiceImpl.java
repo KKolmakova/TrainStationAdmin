@@ -3,8 +3,8 @@ package com.kolmakova.responseServices.impl;
 import com.kolmakova.dto.PassengerDTO;
 import com.kolmakova.dto.PaymentDTO;
 import com.kolmakova.entities.Payment;
-import com.kolmakova.responseServices.EditResponseService;
-import com.kolmakova.responses.EditResponse;
+import com.kolmakova.responseServices.EditPassengerResponseService;
+import com.kolmakova.responses.EditPassengerResponse;
 import com.kolmakova.services.PassengerService;
 import com.kolmakova.services.PaymentService;
 import com.kolmakova.utils.Converter;
@@ -17,7 +17,7 @@ import java.util.List;
 
 @Service
 @Transactional
-public class EditResponseServiceImpl implements EditResponseService {
+public class EditPassengerResponseServiceImpl implements EditPassengerResponseService {
 
     @Autowired
     private PassengerService passengerService;
@@ -27,8 +27,8 @@ public class EditResponseServiceImpl implements EditResponseService {
     private Converter converter;
 
     @Override
-    public EditResponse getResponse(int passengerId) {
-        EditResponse editResponse = new EditResponse();
+    public EditPassengerResponse getResponse(int passengerId) {
+        EditPassengerResponse editPassengerResponse = new EditPassengerResponse();
 
         List<Payment> paymentList = paymentService.getPaymentsByPassengerId(passengerId);
         List<PaymentDTO> payments = converter.convertToPaymentDTOList(paymentList);
@@ -45,10 +45,10 @@ public class EditResponseServiceImpl implements EditResponseService {
             }
         }
 
-        editResponse.setPaymentDTOList(paymentDTOList);
-        editResponse.setDeletedPaymentDTOList(deletesPaymentsDTO);
-        editResponse.setPassengerDTO(passengerDTO);
+        editPassengerResponse.setPaymentDTOList(paymentDTOList);
+        editPassengerResponse.setDeletedPaymentDTOList(deletesPaymentsDTO);
+        editPassengerResponse.setPassengerDTO(passengerDTO);
 
-        return editResponse;
+        return editPassengerResponse;
     }
 }
