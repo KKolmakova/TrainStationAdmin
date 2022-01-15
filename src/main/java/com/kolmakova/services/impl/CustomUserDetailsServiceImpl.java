@@ -1,10 +1,10 @@
 package com.kolmakova.services.impl;
 
 import com.kolmakova.entities.Account;
-import com.kolmakova.entities.TrainStationUser;
 import com.kolmakova.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -33,15 +33,10 @@ public class CustomUserDetailsServiceImpl implements UserDetailsService {
     }
 
     private UserDetails convertToUserDetails(Account account) {
-//        ((AnonymousAuthenticationToken)SecurityContextHolder.getContext().getAuthentication().getPrincipal()).isAuthenticated()
-        TrainStationUser user = new TrainStationUser(
+        return new User(
                 account.getUsername(),
                 account.getPassword(),
                 Collections.singleton(new SimpleGrantedAuthority(account.getRole()))
         );
-
-        user.setAccountId(account.getId());
-
-        return user;
     }
 }

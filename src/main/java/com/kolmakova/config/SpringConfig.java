@@ -3,7 +3,6 @@ package com.kolmakova.config;
 import org.hibernate.SessionFactory;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -17,7 +16,6 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
@@ -38,11 +36,12 @@ import java.util.Properties;
 @PropertySource("classpath:application.properties")
 public class SpringConfig implements WebMvcConfigurer {
 
+    private final static String COMPONENT_SCAN_PACKAGE = "com.kolmakova.*";
+
     @Autowired
     private ApplicationContext applicationContext;
     @Autowired
     private Environment env;
-    private final static String COMPONENT_SCAN_PACKAGE = "com.kolmakova.*";
 
     @Bean
     public DataSource dataSource() {
@@ -78,15 +77,6 @@ public class SpringConfig implements WebMvcConfigurer {
     }
 
     @Autowired
-    @Bean
-    public JpaTransactionManager transactionManager(LocalContainerEntityManagerFactoryBean entityManagerFactory) {
-        JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory(entityManagerFactory.getObject());
-
-        return transactionManager;
-    }
-
-    @Autowired
     @Bean(name = "entityManagerFactory")
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
         LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
@@ -97,6 +87,17 @@ public class SpringConfig implements WebMvcConfigurer {
 
         return entityManagerFactoryBean;
     }
+
+    @Autowired
+    @Bean
+    public JpaTransactionManager transactionManager(LocalContainerEntityManagerFactoryBean entityManagerFactory) {
+        JpaTransactionManager transactionManager = new JpaTransactionManager();
+        transactionManager.setEntityManagerFactory(entityManagerFactory.getObject());
+
+        return transactionManager;
+    }
+
+    //    template
 
     @Bean
     public SpringResourceTemplateResolver templateResolver() {
@@ -118,6 +119,8 @@ public class SpringConfig implements WebMvcConfigurer {
 
         return templateEngine;
     }
+
+    //    view
 
     @Override
     public void configureViewResolvers(ViewResolverRegistry registry) {
@@ -153,6 +156,8 @@ public class SpringConfig implements WebMvcConfigurer {
         localeResolver.setDefaultLocale(new Locale("ru"));
         return localeResolver;
     }
+
+    //    interceptor
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
