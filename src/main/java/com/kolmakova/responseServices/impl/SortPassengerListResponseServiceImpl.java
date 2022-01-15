@@ -53,7 +53,7 @@ public class SortPassengerListResponseServiceImpl implements SortPassengerListRe
     }
 
     private List<PassengerDTO> getAllPassengersDTO() {
-        List<Passenger> passengers = passengerService.getAllPassengers();
+        List<Passenger> passengers = passengerService.getAll();
         List<PassengerDTO> passengerDTOList = new ArrayList<>();
 
         for (Passenger passenger : passengers) {

@@ -30,12 +30,12 @@ public class EditPassengerResponseServiceImpl implements EditPassengerResponseSe
     public EditPassengerResponse getResponse(int passengerId) {
         EditPassengerResponse editPassengerResponse = new EditPassengerResponse();
 
-        List<Payment> paymentList = paymentService.getPaymentsByPassengerId(passengerId);
+        List<Payment> paymentList = paymentService.getByPassengerId(passengerId);
         List<PaymentDTO> payments = converter.convertToPaymentDTOList(paymentList);
 
         List<PaymentDTO> deletesPaymentsDTO = new ArrayList<>();
         List<PaymentDTO> paymentDTOList = new ArrayList<>();
-        PassengerDTO passengerDTO = converter.convertToPassengerDTO(passengerService.getPassengerById(passengerId));
+        PassengerDTO passengerDTO = converter.convertToPassengerDTO(passengerService.getById(passengerId));
 
         for (PaymentDTO paymentDTO : payments) {
             if (paymentDTO.isDeleted()) {

@@ -10,8 +10,6 @@ public class PassengerDTO {
     private int id;
     private String name;
     private String surname;
-    private String sex;
-    private Date birthDate;
     private DocumentDTO documentDTO;
     private String documentSeries;
     private List<PaymentDTO> paymentDTOList;
@@ -26,14 +24,6 @@ public class PassengerDTO {
 
     public void setSurname(String surname) {
         this.surname = surname;
-    }
-
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
-
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
     }
 
     public DocumentDTO getDocumentDTO() {
@@ -58,14 +48,6 @@ public class PassengerDTO {
 
     public String getSurname() {
         return surname;
-    }
-
-    public String getSex() {
-        return sex;
-    }
-
-    public Date getBirthDate() {
-        return birthDate;
     }
 
     public DocumentDTO getDocumentType() {

@@ -5,9 +5,10 @@ import com.kolmakova.entities.Payment;
 import java.util.List;
 
 public interface PaymentService {
-    Payment savePayment(Payment payment);
 
-    Payment getPaymentById(int checkId);
+    Payment save(Payment payment);
 
-    List<Payment> getPaymentsByPassengerId(Integer passengerId);
+    Payment getById(int paymentId);
+
+    List<Payment> getByPassengerId(Integer passengerId);
 }

@@ -1,0 +1,25 @@
+<div th:fragment="home" xmlns:th="http://www.w3.org/1999/xhtml">
+    <th:block th:if="${home}">
+        <form th:method="GET" th:action="@{/home/passengers}">
+            <div class="container-xxl" align="center">
+                <div class="card mt-4 mb-3" style="max-width: 1000px;">
+                    <div class="row g-0">
+                        <div class="col">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <th:block th:text="#{admin.home.label.hello}"/>
+                                </h5>
+                                <p class="card-text" th:text="#{admin.home.label.text}"></p>
+                                <button class="btn btn-primary" type="submit"
+                                        th:text="#{admin.home.button.open}"></button>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <img th:src="@{/img/admin.png}" class="img-fluid rounded-start" alt="#">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </th:block>
+</div>

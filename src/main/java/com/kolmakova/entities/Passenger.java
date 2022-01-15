@@ -1,10 +1,6 @@
 package com.kolmakova.entities;
 
-import com.kolmakova.types.DocumentType;
-import org.hibernate.annotations.Where;
-
 import javax.persistence.*;
-import java.sql.Date;
 import java.util.List;
 
 @Table(name = "Passenger")
@@ -20,10 +16,6 @@ public class Passenger {
     private String name;
 
     private String surname;
-    private String sex;
-
-    @Column(name = "birth_date")
-    private Date birthDate;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "document_type_id")
@@ -48,14 +40,6 @@ public class Passenger {
         this.surname = surname;
     }
 
-    public void setSex(String sex) {
-        this.sex = sex;
-    }
-
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
-    }
-
     public void setDocumentType(Document documentType) {
         this.documentType = documentType;
     }
@@ -74,14 +58,6 @@ public class Passenger {
 
     public String getSurname() {
         return surname;
-    }
-
-    public String getSex() {
-        return sex;
-    }
-
-    public Date getBirthDate() {
-        return birthDate;
     }
 
     public Document getDocumentType() {

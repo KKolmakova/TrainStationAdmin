@@ -42,7 +42,7 @@ public class SpringConfig implements WebMvcConfigurer {
     private ApplicationContext applicationContext;
     @Autowired
     private Environment env;
-    private final static String COMPONENT_SCAN_PACKAGE = "com.kolmakova";
+    private final static String COMPONENT_SCAN_PACKAGE = "com.kolmakova.*";
 
     @Bean
     public DataSource dataSource() {
@@ -128,21 +128,12 @@ public class SpringConfig implements WebMvcConfigurer {
     }
 
     @Override
-    public void addViewControllers(ViewControllerRegistry registry) {
-        registry.addViewController("/login").setViewName("login");
-    }
-
-    @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/img/**")
                 .addResourceLocations("/resources/img/");
         registry.addResourceHandler("/css/**")
                 .addResourceLocations("/resources/css/");
     }
-
-    @Autowired
-    @Qualifier("userAccessPaymentInterceptor")
-    private HandlerInterceptor userAccessPaymentInterceptor;
 
     //    localization
 
@@ -165,15 +156,10 @@ public class SpringConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-//      locale
         LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
         localeChangeInterceptor.setParamName("lang");
         localeChangeInterceptor.setIgnoreInvalidLocale(true);
 
         registry.addInterceptor(localeChangeInterceptor);
-
-//        security
-//        registry.addInterceptor(userAccessPaymentInterceptor).addPathPatterns("/payment/**");
     }
-
 }

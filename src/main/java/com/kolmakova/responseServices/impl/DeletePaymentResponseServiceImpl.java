@@ -25,7 +25,7 @@ public class DeletePaymentResponseServiceImpl implements DeletePaymentResponseSe
     public PaymentInfoResponse getResponse(Integer paymentId) {
         PaymentInfoResponse paymentInfoResponse = new PaymentInfoResponse();
 
-        Payment payment = paymentService.getPaymentById(paymentId);
+        Payment payment = paymentService.getById(paymentId);
         PaymentDTO paymentDTO = converter.convertToPaymentDTO(markAsDeleted(payment));
 
         paymentInfoResponse.setPaymentDTO(paymentDTO);
@@ -38,6 +38,6 @@ public class DeletePaymentResponseServiceImpl implements DeletePaymentResponseSe
         pricing.setSeatsNumber(pricing.getSeatsNumber() + 1);
         payment.setDeleted(true);
 
-        return paymentService.savePayment(payment);
+        return paymentService.save(payment);
     }
 }

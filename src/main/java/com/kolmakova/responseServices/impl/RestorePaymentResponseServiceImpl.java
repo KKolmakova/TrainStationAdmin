@@ -25,7 +25,7 @@ public class RestorePaymentResponseServiceImpl implements RestorePaymentResponse
     public PaymentInfoResponse getResponse(Integer paymentId) {
         PaymentInfoResponse paymentInfoResponse = new PaymentInfoResponse();
 
-        Payment payment = paymentService.getPaymentById(paymentId);
+        Payment payment = paymentService.getById(paymentId);
         PaymentDTO paymentDTO = converter.convertToPaymentDTO(markAsActing(payment));
 
         paymentInfoResponse.setPaymentDTO(paymentDTO);
@@ -40,6 +40,6 @@ public class RestorePaymentResponseServiceImpl implements RestorePaymentResponse
             pricing.setSeatsNumber(pricing.getSeatsNumber() - 1);
         }
 
-        return paymentService.savePayment(payment);
+        return paymentService.save(payment);
     }
 }

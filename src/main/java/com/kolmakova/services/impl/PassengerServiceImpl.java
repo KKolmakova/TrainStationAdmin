@@ -19,12 +19,12 @@ public class PassengerServiceImpl implements PassengerService {
     private PassengerRepository passengerRepository;
 
     @Override
-    public List<Passenger> getAllPassengers() {
+    public List<Passenger> getAll() {
         return passengerRepository.findAll();
     }
 
     @Override
-    public Passenger getPassengerById(int passengerId) {
+    public Passenger getById(int passengerId) {
         return passengerRepository.findById(passengerId).orElse(new Passenger());
     }
 

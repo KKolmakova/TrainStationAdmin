@@ -15,17 +15,17 @@ public class PaymentServiceImpl implements PaymentService {
     private PaymentRepository paymentRepository;
 
     @Override
-    public Payment savePayment(Payment payment) {
+    public Payment save(Payment payment) {
         return paymentRepository.save(payment);
     }
 
     @Override
-    public Payment getPaymentById(int checkId) {
-        return paymentRepository.findById(checkId).orElse(new Payment());
+    public Payment getById(int paymentId) {
+        return paymentRepository.findById(paymentId).orElse(new Payment());
     }
 
     @Override
-    public List<Payment> getPaymentsByPassengerId(Integer passengerId) {
+    public List<Payment> getByPassengerId(Integer passengerId) {
         return paymentRepository.getPassengerPayments(passengerId);
     }
 }

@@ -16,10 +16,11 @@ public class MainAdminController {
     @Autowired
     private SortPassengerListResponseService sortPassengerListResponseService;
 
-    @GetMapping()
+    @GetMapping
     public String home(Model model) {
         model.addAttribute("home", true);
-        return "home";
+
+        return "trainStationAdmin";
     }
 
     @GetMapping("/passengers")

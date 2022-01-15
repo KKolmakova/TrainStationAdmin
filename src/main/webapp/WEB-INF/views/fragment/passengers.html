@@ -3,48 +3,55 @@
         <div class="row">
             <div class="col-3">
                 <th:block
-                        th:include="fragment/passengerCard.html::passengerCard">
+                        th:include="fragment/sortArea.html::sortArea">
                 </th:block>
             </div>
 
             <div class="col">
-                <table class="table table-striped">
-                    <div class="row mt-3">
-                        <tr>
-                            <th>№</th>
-                            <th th:text="#{admin.passengers.label.name}"></th>
-                            <th th:text="#{admin.passengers.label.surname}"></th>
-                            <th th:text="#{admin.passengers.label.documentType}"></th>
-                            <th th:text="#{admin.passengers.label.documentSeries}"></th>
-                            <th th:text="#{admin.passengers.label.receipts}"></th>
-                        </tr>
-                        <div th:each="passenger,state: ${response.getPassengerDTOList()}">
+                <th:block th:if="${response.getPassengerDTOList().isEmpty()}">
+                    <div class="alert alert-primary mt-3" role="alert" th:text="#{admin.passengers.alert.noPassenger}"></div>
+                </th:block>
+
+                <th:block th:if="${not response.getPassengerDTOList().isEmpty()}">
+                    <table class="table table-striped">
+                        <div class="row mt-3">
                             <tr>
-                                <td>
-                                    <p th:text="${state.index + 1}"></p>
-                                </td>
-                                <td>
-                                    <p th:text="${passenger.getName()}"></p>
-                                </td>
-                                <td>
-                                    <p th:text="${passenger.getSurname()}"></p>
-                                </td>
-                                <td>
-                                    <p th:text="${passenger.getDocumentType().getType().getDisplayName()}"></p>
-                                </td>
-                                <td>
-                                    <p th:text="${passenger.getDocumentSeries()}"></p>
-                                </td>
-                                <td>
-                                    <form th:method="GET" th:action="@{/passenger/__${passenger.getId()}__/print}">
-                                        <button class="btn btn-outline-primary" type="submit" th:text="#{admin.passengers.button.open}"></button>
-                                        <br>
-                                    </form>
-                                </td>
+                                <th>№</th>
+                                <th th:text="#{admin.passengers.label.name}"></th>
+                                <th th:text="#{admin.passengers.label.surname}"></th>
+                                <th th:text="#{admin.passengers.label.documentType}"></th>
+                                <th th:text="#{admin.passengers.label.documentSeries}"></th>
+                                <th th:text="#{admin.passengers.label.receipts}"></th>
                             </tr>
+                            <div th:each="passenger,state: ${response.getPassengerDTOList()}">
+                                <tr>
+                                    <td>
+                                        <p th:text="${state.index + 1}"></p>
+                                    </td>
+                                    <td>
+                                        <p th:text="${passenger.getName()}"></p>
+                                    </td>
+                                    <td>
+                                        <p th:text="${passenger.getSurname()}"></p>
+                                    </td>
+                                    <td>
+                                        <p th:text="${passenger.getDocumentType().getType().getDisplayName()}"></p>
+                                    </td>
+                                    <td>
+                                        <p th:text="${passenger.getDocumentSeries()}"></p>
+                                    </td>
+                                    <td>
+                                        <form th:method="GET" th:action="@{/passenger/__${passenger.getId()}__/print}">
+                                            <button class="btn btn-outline-primary" type="submit"
+                                                    th:text="#{admin.passengers.button.open}"></button>
+                                            <br>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </div>
                         </div>
-                    </div>
-                </table>
+                    </table>
+                </th:block>
             </div>
         </div>
     </div>

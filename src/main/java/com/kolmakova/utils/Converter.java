@@ -5,11 +5,17 @@ import com.kolmakova.entities.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Component
 public class Converter {
+
+    private static final String DATE_FORMAT = "dd.MM.yyyy";
+    private static final String TIME_FORMAT = "HH:mm";
 
     public TrainDTO convertToTrainDTO(Train train) {
         TrainDTO trainDTO = new TrainDTO();
@@ -22,6 +28,15 @@ public class Converter {
         }
         trainDTO.setPricingDTOList(pricingDTOList);
 
+        Date departureDate = trainDTO.getDepartureDate();
+        Date departureTime = trainDTO.getDepartureTime();
+
+        if (Objects.nonNull(departureDate)) {
+            trainDTO.setDepartureDateStr(new SimpleDateFormat(DATE_FORMAT).format(departureDate));
+        }
+        if (Objects.nonNull(departureTime)) {
+            trainDTO.setDepartureTimeStr(new SimpleDateFormat(TIME_FORMAT).format(departureTime));
+        }
         return trainDTO;
     }
 
