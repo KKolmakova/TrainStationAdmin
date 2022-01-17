@@ -90,8 +90,16 @@
 
                                         <td>
                                             <form th:method="GET" th:action="@{payment/__${payment.getId()}__/restore}">
-                                                <button type="submit" class="btn btn-outline-success"
-                                                        th:text="#{admin.edit.button.restore}"></button>
+                                                <th:block
+                                                        th:if="${payment.getPricingDTO().getSeatsNumber() == 0}">
+                                                    <button type="submit" class="btn btn-outline-secondary"
+                                                            th:text="#{admin.edit.button.restore}"></button>
+                                                </th:block>
+                                                <th:block
+                                                        th:if="${payment.getPricingDTO().getSeatsNumber() > 0}">
+                                                    <button type="submit" class="btn btn-outline-success"
+                                                            th:text="#{admin.edit.button.restore}"></button>
+                                                </th:block>
                                             </form>
                                         </td>
                                     </tr>

@@ -4,3 +4,7 @@
 .alert{
     font-size:17px;
 }
+.center-img {
+  display: block;
+  margin: 0 auto;
+}

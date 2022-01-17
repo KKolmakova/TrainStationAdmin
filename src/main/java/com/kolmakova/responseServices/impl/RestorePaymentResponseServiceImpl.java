@@ -6,7 +6,7 @@ import com.kolmakova.entities.Pricing;
 import com.kolmakova.responseServices.RestorePaymentResponseService;
 import com.kolmakova.responses.PaymentInfoResponse;
 import com.kolmakova.services.PaymentService;
-import com.kolmakova.utils.Converter;
+import com.kolmakova.util.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -7,7 +7,7 @@ import com.kolmakova.repositories.DocumentRepository;
 import com.kolmakova.responseServices.SortPassengerListResponseService;
 import com.kolmakova.responses.PassengerListResponse;
 import com.kolmakova.services.PassengerService;
-import com.kolmakova.utils.Converter;
+import com.kolmakova.util.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -7,7 +7,7 @@ import com.kolmakova.responseServices.EditPassengerResponseService;
 import com.kolmakova.responses.EditPassengerResponse;
 import com.kolmakova.services.PassengerService;
 import com.kolmakova.services.PaymentService;
-import com.kolmakova.utils.Converter;
+import com.kolmakova.util.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

@@ -57,6 +57,7 @@ public class SpringConfig implements WebMvcConfigurer {
 
     private Properties getHibernateProperty() {
         Properties properties = new Properties();
+
         properties.put("hibernate.dialect", env.getProperty("spring.jpa.properties.hibernate.dialect"));
         properties.put("hibernate.show_sql", env.getProperty("spring.jpa.show-sql"));
         properties.put("current_session_context_class", env.getProperty("spring.jpa.properties.hibernate.current_session_context_class"));
@@ -68,6 +69,7 @@ public class SpringConfig implements WebMvcConfigurer {
     @Bean(name = "sessionFactory")
     public SessionFactory getSessionFactory(DataSource dataSource) throws IOException {
         LocalSessionFactoryBean factoryBean = new LocalSessionFactoryBean();
+
         factoryBean.setPackagesToScan(new String[]{COMPONENT_SCAN_PACKAGE});
         factoryBean.setDataSource(dataSource);
         factoryBean.setHibernateProperties(getHibernateProperty());
@@ -80,6 +82,7 @@ public class SpringConfig implements WebMvcConfigurer {
     @Bean(name = "entityManagerFactory")
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
         LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
+
         entityManagerFactoryBean.setDataSource(dataSource);
         entityManagerFactoryBean.setPersistenceProviderClass(HibernatePersistenceProvider.class);
         entityManagerFactoryBean.setPackagesToScan(COMPONENT_SCAN_PACKAGE);
@@ -92,6 +95,7 @@ public class SpringConfig implements WebMvcConfigurer {
     @Bean
     public JpaTransactionManager transactionManager(LocalContainerEntityManagerFactoryBean entityManagerFactory) {
         JpaTransactionManager transactionManager = new JpaTransactionManager();
+
         transactionManager.setEntityManagerFactory(entityManagerFactory.getObject());
 
         return transactionManager;
@@ -102,6 +106,7 @@ public class SpringConfig implements WebMvcConfigurer {
     @Bean
     public SpringResourceTemplateResolver templateResolver() {
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
+
         templateResolver.setApplicationContext(applicationContext);
         templateResolver.setCharacterEncoding("UTF-8");
         templateResolver.setPrefix("/WEB-INF/views/");
@@ -114,6 +119,7 @@ public class SpringConfig implements WebMvcConfigurer {
     @Bean
     public SpringTemplateEngine templateEngine(SpringResourceTemplateResolver templateResolver) {
         SpringTemplateEngine templateEngine = new SpringTemplateEngine();
+
         templateEngine.setTemplateResolver(templateResolver);
         templateEngine.setEnableSpringELCompiler(true);
 
@@ -125,6 +131,7 @@ public class SpringConfig implements WebMvcConfigurer {
     @Override
     public void configureViewResolvers(ViewResolverRegistry registry) {
         ThymeleafViewResolver resolver = new ThymeleafViewResolver();
+
         resolver.setTemplateEngine(templateEngine(templateResolver()));
         resolver.setCharacterEncoding("UTF-8");
         registry.viewResolver(resolver);
@@ -153,7 +160,9 @@ public class SpringConfig implements WebMvcConfigurer {
     @Bean(name = "localeResolver")
     public CookieLocaleResolver localeResolver() {
         CookieLocaleResolver localeResolver = new CookieLocaleResolver();
+
         localeResolver.setDefaultLocale(new Locale("ru"));
+
         return localeResolver;
     }
 
@@ -162,6 +171,7 @@ public class SpringConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
+
         localeChangeInterceptor.setParamName("lang");
         localeChangeInterceptor.setIgnoreInvalidLocale(true);
 

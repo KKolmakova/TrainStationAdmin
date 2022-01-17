@@ -11,7 +11,7 @@ public class AccountDTO {
 
     public AccountDTO() {
 //       setup default values
-        role = Constants.USER_AUTHORITY;
+        role = Constants.ADMIN_USER_AUTHORITY;
     }
 
     public long getId() {

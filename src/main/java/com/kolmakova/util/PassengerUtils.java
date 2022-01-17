@@ -1,4 +1,4 @@
-package com.kolmakova.utils;
+package com.kolmakova.util;
 
 import com.kolmakova.dto.DocumentDTO;
 import com.kolmakova.entities.Passenger;

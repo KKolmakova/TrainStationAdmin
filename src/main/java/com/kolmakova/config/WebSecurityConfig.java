@@ -28,8 +28,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/resources/**", "/user/signIn" ).permitAll()
-                .antMatchers("/home/**", "/passenger/**").hasAuthority(Constants.USER_AUTHORITY)
+                .antMatchers("/resources/**", "/user/signIn").permitAll()
+                .antMatchers("/home/**", "/passenger/**").hasAuthority(Constants.ADMIN_USER_AUTHORITY)
 
                 .and()
                 .formLogin()
@@ -40,7 +40,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .logoutUrl("/logout")
-                .invalidateHttpSession(true);
+                .invalidateHttpSession(true)
+
+                .and()
+                .exceptionHandling()
+                .accessDeniedPage("/errors/accessDenied");
     }
 
 
