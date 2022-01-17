@@ -7,6 +7,7 @@ import com.kolmakova.responseServices.DeletePaymentResponseService;
 import com.kolmakova.responses.PaymentInfoResponse;
 import com.kolmakova.services.PaymentService;
 import com.kolmakova.util.Converter;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,8 @@ import javax.transaction.Transactional;
 @Service
 @Transactional
 public class DeletePaymentResponseServiceImpl implements DeletePaymentResponseService {
+
+    private static final Logger LOG = Logger.getLogger(DeletePaymentResponseService.class);
 
     @Autowired
     private PaymentService paymentService;
@@ -38,6 +41,7 @@ public class DeletePaymentResponseServiceImpl implements DeletePaymentResponseSe
         pricing.setSeatsNumber(pricing.getSeatsNumber() + 1);
         payment.setDeleted(true);
 
+        LOG.info(String.format("Payment number %s on passenger %s %s was mark as deleted", payment.getId(), payment.getPassenger().getName(), payment.getPassenger().getSurname()));
         return paymentService.save(payment);
     }
 }
